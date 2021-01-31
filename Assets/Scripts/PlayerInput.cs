@@ -27,7 +27,7 @@ public class PlayerInput : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.BallStopped.AddListener(Active);
-        playerMovement.BallShot.AddListener(Desactive);
+        playerMovement.OnBallShot.AddListener(Desactive);
     }
     #endregion
 

@@ -9,7 +9,7 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<PlayerMovement>())
+        if(other.GetComponentInParent<PlayerMovement>())
         {
             OnPlayerEntered.Invoke();
         }

@@ -7,7 +7,7 @@ public class LevelVisualizer : MonoBehaviour
     [SerializeField]
     private LayerMask invisibleLayerMask = new LayerMask();
 
-    private Camera mainCamera = Camera.main;
+    private Camera mainCamera = null;
 
     private void Start()
     {

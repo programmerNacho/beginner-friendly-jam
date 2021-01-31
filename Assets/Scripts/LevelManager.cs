@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private Goal goal = null;
     [SerializeField]
-    private GameObject player = null;
+    private PlayerMovement player = null;
 
     private TimeRegister timeRegister = null;
 
@@ -34,12 +34,14 @@ public class LevelManager : MonoBehaviour
     {
         checkpointManager.OnPlayerReachedCheckpoint.AddListener(PlayerReachedCheckpoint);
         goal.OnPlayerEntered.AddListener(PlayerReachedGoal);
+        player.OnBallShot.AddListener(BallShotTaken);
     }
 
     private void OnDisable()
     {
         checkpointManager.OnPlayerReachedCheckpoint.RemoveListener(PlayerReachedCheckpoint);
         goal.OnPlayerEntered.RemoveListener(PlayerReachedGoal);
+        player.OnBallShot.RemoveListener(BallShotTaken);
     }
 
     private void Start()
@@ -61,12 +63,13 @@ public class LevelManager : MonoBehaviour
         }
 
         ballShotCount++;
-        levelVisualizer.Show();
+        levelVisualizer.Hide();
     }
 
     private void PlayerReachedGoal()
     {
         timeRegister.Stop();
+        print(timeRegister.Seconds);
     }
 
     private void PlayerReachedCheckpoint(Checkpoint checkpoint)

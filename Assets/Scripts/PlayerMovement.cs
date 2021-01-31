@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxForce = 5;
 
     public UnityEvent BallStopped;
-    public UnityEvent BallShot;
+    public UnityEvent OnBallShot;
 
     bool stoped = true;
 
@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rigi.velocity.magnitude <= 0.3f && !stoped)
         {
-            print("STOP");
             rigi.velocity = Vector3.zero;
             BallStopped.Invoke();
             line.enabled = true;
@@ -49,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigi.AddForce(direction * force * forceMult, ForceMode.Impulse);
 
-        BallShot.Invoke();
+        OnBallShot.Invoke();
         line.enabled = false;
 
         stoped = false;

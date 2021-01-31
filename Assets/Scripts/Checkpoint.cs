@@ -29,9 +29,10 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<PlayerMovement>())
+        if(other.GetComponentInParent<PlayerMovement>())
         {
             OnPlayerEntered.Invoke(this);
+            print("Check");
         }
     }
 }
