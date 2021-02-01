@@ -20,6 +20,11 @@ public class PlayerMovement : MonoBehaviour
 
     bool stoped = true;
 
+    Checkpoint checkpoint = null;
+    bool respawn = false;
+    public float checkpointSpeed = 5;
+    public ParticleSystem deadParticles;
+
     #endregion
 
     #region Inicialicar
@@ -36,13 +41,41 @@ public class PlayerMovement : MonoBehaviour
     #region Procesos
     private void Update()
     {
-        if (rigi.velocity.magnitude <= 0.3f && !stoped)
+        BallVelocity();
+        MoveYoCheckpoint();
+    }
+    void BallVelocity()
+    {
+        if (rigi.velocity.magnitude <= 0.1f && !stoped)
         {
             rigi.velocity = Vector3.zero;
             BallStopped.Invoke();
             line.enabled = true;
             stoped = true;
         }
+    }
+    void MoveYoCheckpoint()
+    {
+        if (respawn)
+        {
+            if (transform.position != checkpoint.SpawnPoint.transform.position)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, checkpoint.SpawnPoint.transform.position, checkpointSpeed * Time.deltaTime);
+            }
+            else
+            {
+                line.enabled = true;
+                respawn = false;
+                SetRigibody(true);
+                BallStopped.Invoke();
+            }
+        }
+    }
+
+    void SetRigibody(bool value)
+    {
+        rigi.isKinematic = !value;
+        rigi.useGravity = value;
     }
     public void ShotBall(Vector3 direction, float force)
     {
@@ -58,6 +91,21 @@ public class PlayerMovement : MonoBehaviour
     {
         line.SetPosition(0, posA);
         line.SetPosition(1, posB);
+    }
+
+    public void ReturnToCheckPoint(Checkpoint checkpoint)
+    {
+        if (!respawn && !stoped)
+        {
+            this.checkpoint = checkpoint;
+            deadParticles.Play();
+
+            line.enabled = false;
+            respawn = true;
+            SetRigibody(false);
+
+            OnBallShot.Invoke();
+        }
     }
     #endregion
 

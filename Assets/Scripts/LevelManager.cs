@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
@@ -79,7 +80,9 @@ public class LevelManager : MonoBehaviour
 
     private void RespawnPlayerInLastCheckpoint()
     {
-        player.transform.position = checkpointManager.LastCheckpoint.SpawnPoint.position;
+        //player.transform.position = checkpointManager.LastCheckpoint.SpawnPoint.position;
+
+        player.ReturnToCheckPoint(checkpointManager.LastCheckpoint);
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         levelVisualizer.Show();
     }

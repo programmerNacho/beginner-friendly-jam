@@ -32,7 +32,6 @@ public class Checkpoint : MonoBehaviour
         if(other.GetComponentInParent<PlayerMovement>())
         {
             OnPlayerEntered.Invoke(this);
-            print("Check");
         }
     }
 }

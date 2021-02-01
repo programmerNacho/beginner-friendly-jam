@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -14,6 +13,8 @@ public class PlayerInput : MonoBehaviour
 
     public float mouseInUseTime = 0.1f; // Cuanto tiempo debe estar el raton parado para ignorarlo.
     public float forceDistance = 0.1f;
+
+    public LayerMask rayLayer;
 
     float mouseInUse = 0;
     bool active = true;
@@ -70,14 +71,18 @@ public class PlayerInput : MonoBehaviour
 
     Vector3 MouseDirection()
     {
-        Vector2 ballDir = Camera.main.WorldToScreenPoint(transform.position);
-        Vector2 mouseDir = Mouse.current.position.ReadValue();
+        RaycastHit hit;
+
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        Physics.Raycast(ray, out hit, 100, rayLayer, QueryTriggerInteraction.Collide);
+
         Vector3 direction;
 
-        if (inverse) direction = (ballDir - mouseDir).normalized;
-        else direction = (mouseDir - ballDir).normalized;
+        if (inverse) direction = (transform.position - hit.point).normalized;
+        else direction = (hit.point - transform.position).normalized;
 
-        return new Vector3(direction.x, 0, direction.y);
+        return new Vector3(direction.x, 0, direction.z);
     }
 
     float MouseImpulse()

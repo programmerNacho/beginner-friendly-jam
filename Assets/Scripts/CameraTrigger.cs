@@ -17,7 +17,7 @@ public class CameraTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<PlayerMovement>())
+        if(other.GetComponentInParent<PlayerMovement>())
         {
             cameraManager.ChangeVirtualCamera(virtualCamera);
         }
