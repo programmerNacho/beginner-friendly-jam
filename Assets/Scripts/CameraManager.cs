@@ -28,6 +28,8 @@ public class CameraManager : MonoBehaviour
                 c.gameObject.SetActive(false);
             }
         }
+
+        ChangeVirtualCamera(initialVirtualCamera);
     }
 
     public void ChangeVirtualCamera(CinemachineVirtualCamera newVirtualCamera)
