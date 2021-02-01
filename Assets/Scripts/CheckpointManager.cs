@@ -4,12 +4,21 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
     [SerializeField]
+    private Checkpoint initialCheckpoint = null;
+
     private List<Checkpoint> checkpoints = new List<Checkpoint>();
 
     public Checkpoint InitialCheckpoint
     {
-        get;
-        private set;
+        get
+        {
+            return initialCheckpoint;
+        }
+
+        private set
+        {
+            initialCheckpoint = value;
+        }
     }
 
     public Checkpoint LastCheckpoint
@@ -28,13 +37,15 @@ public class CheckpointManager : MonoBehaviour
 
     private void InitializeVariables()
     {
+        checkpoints = new List<Checkpoint>(FindObjectsOfType<Checkpoint>());
+
         if (checkpoints.Count == 0)
         {
             Debug.LogError("No Checkpoint assigned in list.");
             return;
         }
 
-        InitialCheckpoint = LastCheckpoint = checkpoints[0];
+        LastCheckpoint = initialCheckpoint;
     }
 
     private void SubscribeToCheckpoints()
