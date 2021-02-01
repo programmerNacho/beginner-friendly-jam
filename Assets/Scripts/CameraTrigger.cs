@@ -22,10 +22,4 @@ public class CameraTrigger : MonoBehaviour
             cameraManager.ChangeVirtualCamera(virtualCamera);
         }
     }
-
-    [ContextMenu("Heasdas")]
-    private void Juejue()
-    {
-        cameraManager.ChangeVirtualCamera(virtualCamera);
-    }
 }
