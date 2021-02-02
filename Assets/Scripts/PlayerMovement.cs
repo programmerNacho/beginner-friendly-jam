@@ -3,112 +3,113 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+
 public class PlayerMovement : MonoBehaviour
 {
-    // Estado de la bola
-    // Va a leer los inputs y a mover la bola
+    [SerializeField]
+    private float maxDistance = 5f;
+    [SerializeField]
+    private float maxImpulse = 10f;
 
-    #region Variables
-    Rigidbody rigi;
-    LineRenderer line;
+    public enum ShotState { Nothing, Start, Charge, Release }
 
-    public float forceMult = 1.5f;
-    public float maxForce = 5;
+    public ShotState currentShotState = ShotState.Nothing;
 
-    public UnityEvent BallStopped;
-    public UnityEvent OnBallShot;
+    private PlayerInput playerInput = null;
+    private new Rigidbody rigidbody = null;
+    private Camera mainCamera = null;
 
-    bool stoped = true;
+    private Vector3 playerToMouse = Vector3.zero;
 
-    Checkpoint checkpoint = null;
-    bool respawn = false;
-    public float checkpointSpeed = 5;
-    public ParticleSystem deadParticles;
-
-    #endregion
-
-    #region Inicialicar
-    private void Start()
+    private void Awake()
     {
-        rigi = GetComponent<Rigidbody>();
-        line = GetComponent<LineRenderer>();
+        playerInput = GetComponent<PlayerInput>();
+        rigidbody = GetComponent<Rigidbody>();
+        mainCamera = Camera.main;
     }
-    #endregion
 
-    #region Inputs
-    #endregion
-
-    #region Procesos
     private void Update()
     {
-        BallVelocity();
-        MoveYoCheckpoint();
-    }
-    void BallVelocity()
-    {
-        if (rigi.velocity.magnitude <= 0.1f && !stoped)
+        CalculatePlayerToMouse();
+
+        if(playerInput.pressed)
         {
-            rigi.velocity = Vector3.zero;
-            BallStopped.Invoke();
-            line.enabled = true;
-            stoped = true;
+            ShotStart();
         }
-    }
-    void MoveYoCheckpoint()
-    {
-        if (respawn)
+        else if(playerInput.holded)
         {
-            if (transform.position != checkpoint.SpawnPoint.transform.position)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, checkpoint.SpawnPoint.transform.position, checkpointSpeed * Time.deltaTime);
-            }
-            else
-            {
-                line.enabled = true;
-                respawn = false;
-                SetRigibody(true);
-                BallStopped.Invoke();
-            }
+            ShotHold();
+        }
+        else if(playerInput.released)
+        {
+            ShotReleased();
+        }
+        else
+        {
+            currentShotState = ShotState.Nothing;
         }
     }
 
-    void SetRigibody(bool value)
+    private void CalculatePlayerToMouse()
     {
-        rigi.isKinematic = !value;
-        rigi.useGravity = value;
-    }
-    public void ShotBall(Vector3 direction, float force)
-    {
-        rigi.AddForce(direction * force * forceMult, ForceMode.Impulse);
+        playerToMouse = Vector3.zero;
 
-        OnBallShot.Invoke();
-        line.enabled = false;
+        Plane plane = new Plane(Vector3.up, transform.position);
 
-        stoped = false;
-    }
+        Vector3 mouseScreenPosition = playerInput.mouseScreenPosition;
 
-    public void DrawLine(Vector3 posA, Vector3 posB)
-    {
-        line.SetPosition(0, posA);
-        line.SetPosition(1, posB);
-    }
+        Ray mouseRay = mainCamera.ScreenPointToRay(mouseScreenPosition);
 
-    public void ReturnToCheckPoint(Checkpoint checkpoint)
-    {
-        if (!respawn && !stoped)
+        if (plane.Raycast(mouseRay, out float distanceFromOrigin))
         {
-            this.checkpoint = checkpoint;
-            deadParticles.Play();
-
-            line.enabled = false;
-            respawn = true;
-            SetRigibody(false);
-
-            OnBallShot.Invoke();
+            Vector3 hitPoint = mouseRay.GetPoint(distanceFromOrigin);
+            playerToMouse = hitPoint - transform.position;
         }
     }
-    #endregion
 
-    #region Outputs
-    #endregion
+    private void ShotStart()
+    {
+        currentShotState = ShotState.Start;
+    }
+
+    private void ShotHold()
+    {
+        currentShotState = ShotState.Charge;
+    }
+
+    private void ShotReleased()
+    {
+        float impulseMultiplier = CalculateImpulseMultiplier();
+
+        float impulse = impulseMultiplier * maxImpulse;
+
+        rigidbody.AddForce(playerToMouse.normalized * impulse, ForceMode.Impulse);
+
+        currentShotState = ShotState.Release;
+    }
+
+    public float CalculateImpulseMultiplier()
+    {
+        float distancePlayerToMouse = playerToMouse.magnitude;
+
+        if(distancePlayerToMouse > maxDistance)
+        {
+            distancePlayerToMouse = maxDistance;
+        }
+
+        return distancePlayerToMouse / maxDistance;
+    }
+
+    public Vector3 GetImpulseVector()
+    {
+        float distancePlayerToMouse = playerToMouse.magnitude;
+
+        if (distancePlayerToMouse > maxDistance)
+        {
+            return playerToMouse.normalized * maxDistance;
+        }
+
+        return playerToMouse;
+    }
 }

@@ -35,14 +35,14 @@ public class LevelManager : MonoBehaviour
     {
         checkpointManager.OnPlayerReachedCheckpoint.AddListener(PlayerReachedCheckpoint);
         goal.OnPlayerEntered.AddListener(PlayerReachedGoal);
-        player.OnBallShot.AddListener(BallShotTaken);
+        //player.OnShotReleased.AddListener(BallShotTaken);
     }
 
     private void OnDisable()
     {
         checkpointManager.OnPlayerReachedCheckpoint.RemoveListener(PlayerReachedCheckpoint);
         goal.OnPlayerEntered.RemoveListener(PlayerReachedGoal);
-        player.OnBallShot.RemoveListener(BallShotTaken);
+       // player.OnShotReleased.RemoveListener(BallShotTaken);
     }
 
     private void Start()
@@ -82,7 +82,7 @@ public class LevelManager : MonoBehaviour
     {
         //player.transform.position = checkpointManager.LastCheckpoint.SpawnPoint.position;
 
-        player.ReturnToCheckPoint(checkpointManager.LastCheckpoint);
+       // player.ReturnToCheckPoint(checkpointManager.LastCheckpoint);
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         levelVisualizer.Show();
     }
