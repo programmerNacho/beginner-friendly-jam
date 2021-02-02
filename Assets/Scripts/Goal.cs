@@ -5,11 +5,20 @@ using UnityEngine.Events;
 
 public class Goal : MonoBehaviour
 {
-    public UnityEvent OnPlayerEntered = new UnityEvent();
+    public UnityEvent OnPlayerEntered = null;
+
+    private void Start()
+    {
+        InicialiceVariables();
+    }
+    void InicialiceVariables()
+    {
+        OnPlayerEntered = FindObjectOfType<LevelManager>().OnMapCompleted;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponentInParent<PlayerMovement>())
+        if(other.GetComponent<PlayerMovement>())
         {
             OnPlayerEntered.Invoke();
         }

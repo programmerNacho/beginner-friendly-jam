@@ -11,6 +11,16 @@ public class PlayerInput : MonoBehaviour
 
     public Vector2 mouseScreenPosition = Vector2.zero;
 
+    public UnityEvent OnClickPress = new UnityEvent();
+    public UnityEvent OnClickRelease = new UnityEvent();
+
+    private void Start()
+    {
+        pressed = false;
+        holded = false;
+        released = false;
+    }
+
     public void ShotButtonEvent(InputAction.CallbackContext context)
     {
         if(context.phase == InputActionPhase.Started)
@@ -18,12 +28,14 @@ public class PlayerInput : MonoBehaviour
             pressed = true;
             holded = true;
             released = false;
+            OnClickPress.Invoke();
         }
         else if(context.phase == InputActionPhase.Canceled)
         {
             pressed = false;
             released = true;
             holded = false;
+            OnClickRelease.Invoke();
         }
     }
 

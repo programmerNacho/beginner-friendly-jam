@@ -22,6 +22,12 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 playerToMouse = Vector3.zero;
 
+    public bool shotReady = false;
+    public bool controllable = false;
+
+    bool canGetInput = false;
+    bool holding = false;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -29,19 +35,59 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
     }
 
+    private void Start()
+    {
+        playerInput.OnClickPress.AddListener(CheckPlayerInputState);
+        playerInput.OnClickRelease.AddListener(CheckPlayerInputState);
+    }
+
     private void Update()
     {
         CalculatePlayerToMouse();
 
-        if(playerInput.pressed)
+        CheckPlayerInputState();
+
+        CalculatePlayerVelocity();
+
+        CheckControllable();
+    }
+
+    public void CheckControllable()
+    {
+        if (controllable && shotReady)
+        {
+            canGetInput = true;
+        }
+        else
+        {
+            canGetInput = false;
+        }
+    }
+
+    public void CalculatePlayerVelocity()
+    {
+        if (rigidbody.velocity.magnitude <= 0.01)
+        {
+            rigidbody.velocity = Vector3.zero;
+            shotReady = true;
+        }
+        else
+        {
+            shotReady = false;
+        }
+    }
+
+    public void CheckPlayerInputState()
+    {
+        if (playerInput.pressed)
         {
             ShotStart();
         }
-        else if(playerInput.holded)
+        else if (playerInput.holded)
         {
             ShotHold();
         }
-        else if(playerInput.released)
+        else if (playerInput.released)
         {
             ShotReleased();
         }
@@ -66,11 +112,17 @@ public class PlayerMovement : MonoBehaviour
             Vector3 hitPoint = mouseRay.GetPoint(distanceFromOrigin);
             playerToMouse = hitPoint - transform.position;
         }
+
+        playerToMouse = new Vector3(playerToMouse.x, 0, playerToMouse.z);
     }
 
     private void ShotStart()
     {
-        currentShotState = ShotState.Start;
+        if (canGetInput)
+        {
+            currentShotState = ShotState.Start;
+            holding = true;
+        }
     }
 
     private void ShotHold()
@@ -80,13 +132,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void ShotReleased()
     {
-        float impulseMultiplier = CalculateImpulseMultiplier();
+        if (holding)
+        {
+            float impulseMultiplier = CalculateImpulseMultiplier();
 
-        float impulse = impulseMultiplier * maxImpulse;
+            float impulse = impulseMultiplier * maxImpulse;
 
-        rigidbody.AddForce(playerToMouse.normalized * impulse, ForceMode.Impulse);
+            rigidbody.AddForce(playerToMouse.normalized * impulse, ForceMode.Impulse);
 
-        currentShotState = ShotState.Release;
+            currentShotState = ShotState.Release;
+            holding = false;
+        }
     }
 
     public float CalculateImpulseMultiplier()

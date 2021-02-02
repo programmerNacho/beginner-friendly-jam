@@ -5220,6 +5220,8 @@ GameObject:
   - component: {fileID: 8711330795435156764}
   - component: {fileID: 3776446743100046890}
   - component: {fileID: 638331988}
+  - component: {fileID: 721827746608062629}
+  - component: {fileID: 5804050837912921171}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -5262,6 +5264,12 @@ MonoBehaviour:
   holded: 0
   released: 0
   mouseScreenPosition: {x: 0, y: 0}
+  OnClickPress:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClickRelease:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8337564879400121282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5277,6 +5285,8 @@ MonoBehaviour:
   maxDistance: 1
   maxImpulse: 6
   currentShotState: 0
+  shotReady: 0
+  controllable: 0
 --- !u!54 &8711330795435156764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5400,6 +5410,37 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &721827746608062629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013657837361137000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0910e17219c554241b04dcaa9e753699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &5804050837912921171
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013657837361137000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 008b7f779ded6044c9b8c4e163982123, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2997469136176127986
 GameObject:
   m_ObjectHideFlags: 0
