@@ -4222,14 +4222,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
-    - target: {fileID: 3743150838615752910, guid: e8e435b7f31c9dc4bb3871014bae1efa, type: 3}
-      propertyPath: maxPitchHit
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3743150838615752910, guid: e8e435b7f31c9dc4bb3871014bae1efa, type: 3}
-      propertyPath: minPitchHit
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8e435b7f31c9dc4bb3871014bae1efa, type: 3}
 --- !u!1001 &8179660120492643060
