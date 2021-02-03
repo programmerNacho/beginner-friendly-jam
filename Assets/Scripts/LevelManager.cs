@@ -37,6 +37,7 @@ public class LevelManager : MonoBehaviour
         mapManager = FindObjectOfType<MapManager>();
         cameraManager = FindObjectOfType<CameraManager>();
         levelVisualizer = GetComponent<LevelVisualizer>();
+        levelVisualizer.Show();
     }
 
     void SubscribeToEvent()
