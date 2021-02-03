@@ -67,7 +67,6 @@ public class LevelStats : MonoBehaviour
         }
     }
 
-    [ContextMenu("Take Shot")]
     public void ShotTaken()
     {
         numberOfShots++;
