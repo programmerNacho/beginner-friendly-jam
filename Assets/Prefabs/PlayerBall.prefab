@@ -5204,7 +5204,10 @@ MonoBehaviour:
   playerMovement: {fileID: 8337564879400121282}
   maxPitchHit: 2
   minPitchHit: 1
-  hitSound: {fileID: 8300000, guid: 5eadbe03d4c4b42478b7054519de26c4, type: 3}
+  shotSound: {fileID: 8300000, guid: 5eadbe03d4c4b42478b7054519de26c4, type: 3}
+  collidedSound: {fileID: 0}
+  spawnSound: {fileID: 8300000, guid: e3e90d461cc59dd46a7ae6282876afeb, type: 3}
+  disappearSound: {fileID: 8300000, guid: e3e90d461cc59dd46a7ae6282876afeb, type: 3}
 --- !u!1 &2013657837361137000
 GameObject:
   m_ObjectHideFlags: 0
@@ -5299,6 +5302,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnBallStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBallCollided:
     m_PersistentCalls:
       m_Calls: []
   GroundLayer:

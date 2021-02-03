@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public UnityEvent OnShotEnd = new UnityEvent(); // Deja d cargar el disparo
     public UnityEvent OnBallMove = new UnityEvent(); // La bola comienza a moverse
     public UnityEvent OnBallStopped = new UnityEvent(); // La bola se detiene completamente
+    public UnityEvent OnBallCollided = new UnityEvent(); // Termina de desaparecer
 
 
     private bool shotHolding = false;
@@ -212,6 +213,13 @@ public class PlayerMovement : MonoBehaviour
     public bool GetShotHolding()
     {
         return shotHolding;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.relativeVelocity.magnitude > 1.5f)
+        {
+            OnBallCollided.Invoke();
+        }
     }
 
     //[SerializeField]
