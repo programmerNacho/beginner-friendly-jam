@@ -622,6 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56aab4e924d8384a9bf4c2eb6385713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playTime: 0
 --- !u!4 &297442760
 Transform:
   m_ObjectHideFlags: 0
@@ -2828,7 +2829,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -4329,6 +4330,7 @@ MonoBehaviour:
   levelStats: {fileID: 297442759}
   timeText: {fileID: 1945444567}
   shotsText: {fileID: 1006846462}
+  deathsText: {fileID: 331017155}
 --- !u!1 &2085787597
 GameObject:
   m_ObjectHideFlags: 0
