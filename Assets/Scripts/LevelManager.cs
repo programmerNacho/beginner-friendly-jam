@@ -89,6 +89,7 @@ public class LevelManager : MonoBehaviour
         PrepareTheMap(mapManager.GetNextMap());
         MovePlayerToSpawnPoint();
         player.Disappear();
+        levelVisualizer.Show();
     }
 
     void PlayerSpawn()
