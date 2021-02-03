@@ -34,7 +34,6 @@ public class KillY : MonoBehaviour
             {
                 if (enabled)
                 {
-                    print(enabled);
                     enabled = false;
                     KillPlayer();
                 }
