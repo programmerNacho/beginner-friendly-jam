@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public UnityEvent OnKillPlayer = new UnityEvent();
     public UnityEvent OnPlayerIsDead = new UnityEvent();
     public UnityEvent OnMapCompleted = new UnityEvent();
+    public UnityEvent OnLevelCompleted = new UnityEvent();
     public UnityEvent OnPlayerCreate = new UnityEvent();
 
     [SerializeField] GameObject playerPrefab = null;
@@ -135,7 +136,7 @@ public class LevelManager : MonoBehaviour
 
     void Victory()
     {
-        Debug.Log("Winner");
+        OnLevelCompleted.Invoke();
     }
 
     public PlayerMovement GetPlayer()

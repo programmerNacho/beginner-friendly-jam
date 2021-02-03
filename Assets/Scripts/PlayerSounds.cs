@@ -14,17 +14,46 @@ public class PlayerSounds : MonoBehaviour
     private AudioSource fxAudioSource = null;
 
     [SerializeField]
-    private AudioClip hitSound = null;
+    private AudioClip shotSound = null;
+    [SerializeField]
+    private AudioClip collidedSound = null;
+    [SerializeField]
+    private AudioClip spawnSound = null;
+    [SerializeField]
+    private AudioClip disappearSound = null;
 
     private void Start()
     {
         fxAudioSource = GetComponent<AudioSource>();
-        playerMovement.OnBallMove.AddListener(PlaySound);
+        playerMovement.OnBallMove.AddListener(PlayShot);
+        playerMovement.OnSpawnStart.AddListener(PlaySpawn);
+        playerMovement.OnDisappearStart.AddListener(PlayDisappear);
+        playerMovement.OnBallCollided.AddListener(PlayCollided);
     }
-    private void PlaySound()
+    private void PlaySound(AudioClip clip)
     {
-        fxAudioSource.pitch = Mathf.Lerp(minPitchHit, maxPitchHit, Random.Range(0f, 1f));
-        fxAudioSource.PlayOneShot(hitSound);
+        if (clip != null)
+        {
+            fxAudioSource.pitch = Mathf.Lerp(minPitchHit, maxPitchHit, Random.Range(0f, 1f));
+            fxAudioSource.PlayOneShot(clip);
+        }
+    }
+
+    private void PlayShot()
+    {
+        PlaySound(shotSound);
+    }
+    private void PlaySpawn()
+    {
+        PlaySound(spawnSound);
+    }
+    private void PlayDisappear()
+    {
+        PlaySound(disappearSound);
+    }
+    private void PlayCollided()
+    {
+        PlaySound(collidedSound);
     }
     private void Update()
     {
