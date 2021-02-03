@@ -18,9 +18,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
         private float airResistance = 0.1f;
 
-    public UnityEvent OnMouseInButton = new UnityEvent(); // Comienza a aparecer
-    public UnityEvent OnNoMouseInButton = new UnityEvent(); // Termina de aparecer
-
     public UnityEvent OnSpawnStart = new UnityEvent(); // Comienza a aparecer
     public UnityEvent OnSpawnEnd = new UnityEvent(); // Termina de aparecer
     public UnityEvent OnDisappearStart = new UnityEvent(); // Comienza a desaparecer
@@ -34,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool shotHolding = false;
     private bool controllable = true;
-    private bool mouseInButton = true;
     private bool shotReady = false;
 
     private bool canGetInput = false;
@@ -61,17 +57,6 @@ public class PlayerMovement : MonoBehaviour
     private void SubcribeToEvents()
     {
         OnSpawnEnd.AddListener(SpawnCompleted);
-        OnMouseInButton.AddListener(SetMouseInButton);
-        OnNoMouseInButton.AddListener(SetNoMouseInButton);
-    }
-
-    private void SetMouseInButton()
-    {
-        mouseInButton = true;
-    }
-    private void SetNoMouseInButton()
-    {
-        mouseInButton = false;
     }
 
     private void Update()
@@ -104,6 +89,10 @@ public class PlayerMovement : MonoBehaviour
         if (!canGetInput) OnShotEnd.Invoke();
     }
 
+    public void ShotCanceled()
+    {
+        OnShotEnd.Invoke();
+    }
     public void ShotUp(Vector3 shotVector)
     {
         if (canGetInput)
@@ -146,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CalculatePlayerVelocity();
         //if (controllable && shotReady && isGrounded)
-        if (controllable && mouseInButton && isGrounded)
+        if (controllable && isGrounded)
         {
             canGetInput = true;
         }

@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
 {
     PlayerMovement playerMovement;
     Camera mainCamera = null;
+    [SerializeField] InputActionAsset playerAction;
 
     Vector3 playerToMouse = Vector3.zero;
 
@@ -20,6 +21,11 @@ public class PlayerInput : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         mainCamera = Camera.main;
+    }
+
+    private void OnDisable()
+    {
+        playerMovement.ShotCanceled();
     }
 
     private void Update()
@@ -38,8 +44,20 @@ public class PlayerInput : MonoBehaviour
         }
         else if (context.canceled)
         {
+            Invoke("ReleaseDelay", Time.deltaTime);
+        }
+    }
+
+    void ReleaseDelay()
+    {
+        if (playerAction.enabled)
+        {
             CalculatePlayerToMouse();
             playerMovement.ShotUp(playerToMouse);
+        }
+        else
+        {
+            playerMovement.ShotCanceled();
         }
     }
     private void CalculatePlayerToMouse()
