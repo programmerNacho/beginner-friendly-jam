@@ -45,13 +45,12 @@ public class CameraManager : MonoBehaviour
 
     void MovingCamera()
     {
-        if (lastVirtualCamera != null)
+        if (lastVirtualCamera == currentVirtualCamera) lastVirtualCamera = null;
+        if (movingCamera && (lastVirtualCamera == null || !CinemachineCore.Instance.IsLive(lastVirtualCamera)))
         {
-            if (movingCamera && !CinemachineCore.Instance.IsLive(lastVirtualCamera))
-            {
-                movingCamera = false;
-                OnCameraBlendEnded.Invoke();
-            }
+            movingCamera = false;
+            lastVirtualCamera = null;
+            OnCameraBlendEnded.Invoke();
         }
     }
 
@@ -62,7 +61,11 @@ public class CameraManager : MonoBehaviour
             currentVirtualCamera.gameObject.SetActive(false);
         }
 
-        lastVirtualCamera = currentVirtualCamera;
+        
+        
+        if (lastVirtualCamera == newVirtualCamera) lastVirtualCamera = null;
+        else lastVirtualCamera = currentVirtualCamera;
+
         movingCamera = true;
 
         currentVirtualCamera = newVirtualCamera;

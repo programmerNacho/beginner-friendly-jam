@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 484772056}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ParticlePivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 575213609}
   - component: {fileID: 575213608}
   - component: {fileID: 575213610}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HitParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575213606}
   serializedVersion: 7
-  lengthInSec: 2
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -147,7 +147,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -201,7 +201,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 2
-      minScalar: 1
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -316,7 +316,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
+      scalar: 0.2
       minScalar: 0.01
       maxCurve:
         serializedVersion: 2
@@ -638,7 +638,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -691,12 +691,12 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 10
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
-    donutRadius: 0.2
+    radiusThickness: 0
+    donutRadius: 0.01
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
@@ -778,7 +778,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.0001
+      value: 0.01
       mode: 0
       spread: 0
       speed:
@@ -3308,7 +3308,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   SizeBySpeedModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -4919,7 +4919,7 @@ GameObject:
   - component: {fileID: 803359014}
   - component: {fileID: 803359015}
   - component: {fileID: 803359016}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5072,7 +5072,7 @@ GameObject:
   - component: {fileID: 8978201785995320146}
   - component: {fileID: 196717887026342883}
   - component: {fileID: 3743150838615752910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5219,10 +5219,10 @@ GameObject:
   - component: {fileID: 8711330795435156764}
   - component: {fileID: 3776446743100046890}
   - component: {fileID: 638331988}
-  - component: {fileID: 7302608912798323143}
   - component: {fileID: 6764454024349404796}
-  m_Layer: 0
-  m_Name: Ball 2
+  - component: {fileID: 6088254725294114045}
+  m_Layer: 8
+  m_Name: PlayerBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5275,6 +5275,18 @@ MonoBehaviour:
   maxImpulse: 6
   velocityToStoping: 1
   airResistance: 0.1
+  OnSpawnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSpawnEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisappearStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisappearEnd:
+    m_PersistentCalls:
+      m_Calls: []
   OnShotStart:
     m_PersistentCalls:
       m_Calls: []
@@ -5284,9 +5296,13 @@ MonoBehaviour:
   OnBallMove:
     m_PersistentCalls:
       m_Calls: []
-  OnBallStoped:
+  OnBallStopped:
     m_PersistentCalls:
       m_Calls: []
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 65
+  groundRadio: 0.11
 --- !u!54 &8711330795435156764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5410,18 +5426,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7302608912798323143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013657837361137000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0910e17219c554241b04dcaa9e753699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &6764454024349404796
 Animator:
   serializedVersion: 3
@@ -5430,7 +5434,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013657837361137000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 008b7f779ded6044c9b8c4e163982123, type: 2}
   m_CullingMode: 0
@@ -5441,6 +5445,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6088254725294114045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013657837361137000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988b3f6b4bb5818449f77fb79f1e8181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2997469136176127986
 GameObject:
   m_ObjectHideFlags: 0
@@ -5452,7 +5468,7 @@ GameObject:
   - component: {fileID: 226799648727053971}
   - component: {fileID: 9065657202648648407}
   - component: {fileID: 7585081643680655257}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5500,7 +5516,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 591f7f0a4def597488f7392d07c39035, type: 2}
+  - {fileID: 2100000, guid: a7742b23449b15042b60449cbf32a275, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5532,7 +5548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5545822557645827930}
   - component: {fileID: 7572335323628047161}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrailRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

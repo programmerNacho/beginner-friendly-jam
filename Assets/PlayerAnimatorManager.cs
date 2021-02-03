@@ -2,37 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerAnimatorManager : MonoBehaviour
 {
-    Rigidbody rigibody = null;
-    PlayerInput playerInput = null;
     PlayerMovement playerMovement = null;
     Animator animator = null;
 
     private void Awake()
     {
         InicializeVariables();
+        SubscribeToEvents();
     }
 
     void InicializeVariables()
     {
-        rigibody = GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>();
         playerMovement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
+    }
+
+    void SubscribeToEvents()
+    {
+        playerMovement.OnSpawnStart.AddListener(Spawn);
+        playerMovement.OnDisappearStart.AddListener(Disappear);
     }
     public void Spawn()
     {
         animator.SetBool("isAlive", true);
     }
-    public void Despawn()
+    public void Disappear()
     {
         animator.SetBool("isAlive", false);
-        playerMovement.SetControllable(false);
     }
-
     public void OnSpawnAnimationIsEnding()
     {
-        playerMovement.SetControllable(true);
+        playerMovement.OnSpawnEnd.Invoke();
+    }
+    public void OnDisappearAnimationIsEnding()
+    {
+        playerMovement.OnDisappearEnd.Invoke();
     }
 }

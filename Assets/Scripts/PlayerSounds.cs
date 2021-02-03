@@ -19,14 +19,19 @@ public class PlayerSounds : MonoBehaviour
     private void Start()
     {
         fxAudioSource = GetComponent<AudioSource>();
+        playerMovement.OnBallMove.AddListener(PlaySound);
     }
-
+    private void PlaySound()
+    {
+        fxAudioSource.pitch = Mathf.Lerp(minPitchHit, maxPitchHit, Random.Range(0f, 1f));
+        fxAudioSource.PlayOneShot(hitSound);
+    }
     private void Update()
     {
-        if(playerMovement.currentShotState == PlayerMovement.ShotState.Release)
-        {
-            fxAudioSource.pitch = Mathf.Lerp(minPitchHit, maxPitchHit, Random.Range(0f, 1f));
-            fxAudioSource.PlayOneShot(hitSound);
-        }
+        //if(playerMovement.currentShotState == PlayerMovement.ShotState.Release)
+        //{
+        //    fxAudioSource.pitch = Mathf.Lerp(minPitchHit, maxPitchHit, Random.Range(0f, 1f));
+        //    fxAudioSource.PlayOneShot(hitSound);
+        //}
     }
 }

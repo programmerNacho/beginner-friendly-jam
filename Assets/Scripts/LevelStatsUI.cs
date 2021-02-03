@@ -12,11 +12,15 @@ public class LevelStatsUI : MonoBehaviour
     private TextMeshProUGUI timeText = null;
     [SerializeField]
     private TextMeshProUGUI shotsText = null;
+    [SerializeField]
+    private TextMeshProUGUI deathsText = null;
 
     private void Update()
     {
         SetTimeText((int)levelStats.playTime);
         SetShotsText(levelStats.NumberOfShots);
+        SetDeathsText(levelStats.NumberOfDeaths / 2);
+        // Lo divido entre 2 porque me cuenta las muertes por duplicado.
     }
 
     public void SetTimeText(int seconds)
@@ -27,5 +31,9 @@ public class LevelStatsUI : MonoBehaviour
     public void SetShotsText(int shots)
     {
         shotsText.text = shots.ToString();
+    }
+    public void SetDeathsText(int deaths)
+    {
+        deathsText.text = deaths.ToString();
     }
 }

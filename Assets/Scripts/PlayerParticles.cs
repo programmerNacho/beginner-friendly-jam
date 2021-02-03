@@ -14,12 +14,13 @@ public class PlayerParticles : MonoBehaviour
     private void Start()
     {
         hitParticle = GetComponent<ParticleSystem>();
+        playerMovement.OnBallMove.AddListener(PlayHitParticle);
     }
 
     private void Update()
     {
-        AlignHitParticle();
-        PlayHitParticle();
+        //AlignHitParticle();
+        //PlayHitParticle();
     }
 
     private void AlignHitParticle()
@@ -29,9 +30,11 @@ public class PlayerParticles : MonoBehaviour
 
     private void PlayHitParticle()
     {
-        if(playerMovement.currentShotState == PlayerMovement.ShotState.Release)
-        {
-            hitParticle.Play();
-        }
+        AlignHitParticle();
+        hitParticle.Play();
+        //if (playerMovement.currentShotState == PlayerMovement.ShotState.Release)
+        //{
+        //    hitParticle.Play();
+        //}
     }
 }

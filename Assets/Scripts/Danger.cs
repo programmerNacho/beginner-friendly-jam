@@ -3,18 +3,18 @@ using UnityEngine.Events;
 
 public class Danger : MonoBehaviour
 {
-    CheckpointEvent ballKill;
+    LevelManager levelManager;
 
     private void Start()
     {
-        ballKill = FindObjectOfType<CheckpointManager>().OnPlayerReachedCheckpoint;
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponentInParent<PlayerMovement>())
         {
-            ballKill.Invoke(FindObjectOfType<CheckpointManager>().LastCheckpoint);
+            levelManager.OnPlayerDead.Invoke();
         }
     }
 }

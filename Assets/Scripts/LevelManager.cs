@@ -7,9 +7,11 @@ public class LevelManager : MonoBehaviour
     public UnityEvent OnPlayerSpawn = new UnityEvent();
     public UnityEvent OnPlayerDead = new UnityEvent();
     public UnityEvent OnMapCompleted = new UnityEvent();
+    public UnityEvent OnPlayerCreate = new UnityEvent();
 
     [SerializeField] GameObject playerPrefab = null;
-    PlayerManager player;
+    PlayerMovement player;
+    bool playerIsDead = false;
 
     MapManager mapManager = null;
     CameraManager cameraManager = null;
@@ -17,6 +19,7 @@ public class LevelManager : MonoBehaviour
     Transform currentSpawnPoint;
     LevelVisualizer levelVisualizer = null;
     CinemachineVirtualCamera currentVirtualCamera;
+
 
     private void Start()
     {
@@ -36,6 +39,7 @@ public class LevelManager : MonoBehaviour
 
     void SubscribeToEvent()
     {
+        OnPlayerDead.AddListener(PlayerDead);
         OnMapCompleted.AddListener(GoToNextMap);
         cameraManager.OnCameraBlendEnded.AddListener(PlayerSpawn);
     }
@@ -68,34 +72,60 @@ public class LevelManager : MonoBehaviour
     void CreatePlayer()
     {
         GameObject newPlayer = Instantiate(playerPrefab);
-        player = newPlayer.GetComponent<PlayerManager>();
+        player = newPlayer.GetComponent<PlayerMovement>();
+        player.OnDisappearEnd.AddListener(PlayerRevive);
+        player.OnBallMove.AddListener(levelVisualizer.Hide);
+        OnPlayerCreate.Invoke();
     }
     void MovePlayerToSpawnPoint()
     {
         // Reposiciona al jugador
         player.transform.position = currentSpawnPoint.transform.position;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        player.Despawn();
     }
 
     void GoToNextMap()
     {
         PrepareTheMap(mapManager.GetNextMap());
         MovePlayerToSpawnPoint();
+        player.Disappear();
     }
 
     void PlayerSpawn()
     {
-        player.Spawn();
+        if (player != null) player.Spawn();
     }
-    void PlayerDespawn()
+
+    void PlayerDisappear()
     {
-        player.Despawn();
+        if (player != null) player.Disappear();
+    }
+
+    private void PlayerDead()
+    {
+        playerIsDead = true;
+        levelVisualizer.Show();
+        PlayerDisappear();
+    }
+
+    private void PlayerRevive()
+    {
+        if (playerIsDead)
+        {
+            playerIsDead = false;
+            PrepareTheMap(mapManager.GetMap());
+            MovePlayerToSpawnPoint();
+        }
     }
 
     void Victory()
     {
         Debug.Log("Winner");
+    }
+
+    public PlayerMovement GetPlayer()
+    {
+        return player;
     }
 
     //public static LevelManager Instance { get; private set; }

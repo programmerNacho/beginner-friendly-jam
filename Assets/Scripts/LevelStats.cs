@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class LevelStats : MonoBehaviour
 {
+    private LevelManager levelManager = null;
     private PlayerMovement playerMovement = null;
 
     public float playTime = 0f;
 
     private int numberOfShots = 0;
+
+    private int numberOfDeaths = 0;
 
     private bool levelFinished = false;
 
@@ -25,17 +28,38 @@ public class LevelStats : MonoBehaviour
         }
     }
 
+    public int NumberOfDeaths
+    {
+        get
+        {
+            return numberOfDeaths;
+        }
+
+        private set
+        {
+            numberOfDeaths = value;
+        }
+    }
+
     private void Start()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        levelManager = FindObjectOfType<LevelManager>();
+        levelManager.OnPlayerCreate.AddListener(SetPlayer);
+        levelManager.OnPlayerDead.AddListener(AddDeath);
+    }
+
+    private void SetPlayer()
+    {
+        playerMovement = levelManager.GetPlayer();
+        playerMovement.OnBallMove.AddListener(ShotTaken);
     }
 
     private void Update()
     {
-        if(playerMovement.currentShotState == PlayerMovement.ShotState.Release)
-        {
-            ShotTaken();
-        }
+        //if(playerMovement.currentShotState == PlayerMovement.ShotState.Release)
+        //{
+        //    ShotTaken();
+        //}
 
         if(numberOfShots > 0 && !levelFinished)
         {
@@ -47,6 +71,11 @@ public class LevelStats : MonoBehaviour
     public void ShotTaken()
     {
         numberOfShots++;
+    }
+
+    private void AddDeath()
+    {
+        numberOfDeaths++;
     }
 
     public void LevelFinished()
