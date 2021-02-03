@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerAnimatorManager : MonoBehaviour
 {
+    [SerializeField]
+    private ParticleSystem spawnParticles = null;
+    [SerializeField]
+    private ParticleSystem deathParticles = null;
+
     PlayerMovement playerMovement = null;
     Animator animator = null;
 
@@ -27,10 +32,13 @@ public class PlayerAnimatorManager : MonoBehaviour
     public void Spawn()
     {
         animator.SetBool("isAlive", true);
+        spawnParticles.Play();
+
     }
     public void Disappear()
     {
         animator.SetBool("isAlive", false);
+        deathParticles.Play();
     }
     public void OnSpawnAnimationIsEnding()
     {

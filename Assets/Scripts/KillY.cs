@@ -18,8 +18,13 @@ public class KillY : MonoBehaviour
         {
             if(playerMovement.transform.position.y <= minY)
             {
-                FindObjectOfType<LevelManager>().OnPlayerDead.Invoke();
+                KillPlayer();
             }
         }
+    }
+
+    public void KillPlayer()
+    {
+        FindObjectOfType<LevelManager>().OnPlayerDead.Invoke();
     }
 }
