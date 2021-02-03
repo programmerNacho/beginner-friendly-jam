@@ -6,9 +6,11 @@ public class LevelStats : MonoBehaviour
 {
     private PlayerMovement playerMovement = null;
 
-    private TimeRegister timeRegister = null;
+    public float playTime = 0f;
 
     private int numberOfShots = 0;
+
+    private bool levelFinished = false;
 
     public int NumberOfShots
     {
@@ -26,8 +28,6 @@ public class LevelStats : MonoBehaviour
     private void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
-
-        timeRegister = new TimeRegister();
     }
 
     private void Update()
@@ -36,26 +36,21 @@ public class LevelStats : MonoBehaviour
         {
             ShotTaken();
         }
+
+        if(numberOfShots > 0 && !levelFinished)
+        {
+            playTime += Time.deltaTime;
+        }
     }
 
     [ContextMenu("Take Shot")]
     public void ShotTaken()
     {
-        if(numberOfShots == 0)
-        {
-            timeRegister.Start();
-        }
-
         numberOfShots++;
     }
 
     public void LevelFinished()
     {
-        timeRegister.Stop();
-    }
-
-    public int GetSeconds()
-    {
-        return (int)timeRegister.Seconds;
+        levelFinished = true;
     }
 }

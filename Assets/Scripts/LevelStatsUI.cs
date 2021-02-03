@@ -15,7 +15,7 @@ public class LevelStatsUI : MonoBehaviour
 
     private void Update()
     {
-        SetTimeText(levelStats.GetSeconds());
+        SetTimeText((int)levelStats.playTime);
         SetShotsText(levelStats.NumberOfShots);
     }
 
