@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 239779901257491902}
   - component: {fileID: 239779901257491897}
   - component: {fileID: 881488423388753064}
+  - component: {fileID: 1217604822367825809}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -239,6 +240,10 @@ MonoBehaviour:
   mapList:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &881488423388753064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +257,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playTime: 0
+--- !u!114 &1217604822367825809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239779901257491896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfdb28def56c9e4448424692dc7adece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minY: -10
 --- !u!114 &750725989
 MonoBehaviour:
   m_ObjectHideFlags: 0
