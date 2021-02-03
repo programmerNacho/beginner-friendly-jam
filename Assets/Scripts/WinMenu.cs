@@ -21,6 +21,7 @@ public class WinMenu : MonoBehaviour
     private void Start()
     {
         levelStats = FindObjectOfType<LevelStats>();
+        FindObjectOfType<LevelManager>().OnLevelCompleted.AddListener(StartWindow);
     }
 
     [ContextMenu("Open Win Menu")]
