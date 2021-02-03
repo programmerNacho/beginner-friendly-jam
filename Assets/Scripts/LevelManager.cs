@@ -5,7 +5,8 @@ using Cinemachine;
 public class LevelManager : MonoBehaviour
 {
     public UnityEvent OnPlayerSpawn = new UnityEvent();
-    public UnityEvent OnPlayerDead = new UnityEvent();
+    public UnityEvent OnKillPlayer = new UnityEvent();
+    public UnityEvent OnPlayerIsDead = new UnityEvent();
     public UnityEvent OnMapCompleted = new UnityEvent();
     public UnityEvent OnPlayerCreate = new UnityEvent();
 
@@ -42,7 +43,7 @@ public class LevelManager : MonoBehaviour
 
     void SubscribeToEvent()
     {
-        OnPlayerDead.AddListener(PlayerDead);
+        OnKillPlayer.AddListener(KillPlayer);
         OnMapCompleted.AddListener(GoToNextMap);
         cameraManager.OnCameraBlendEnded.AddListener(PlayerSpawn);
     }
@@ -77,6 +78,7 @@ public class LevelManager : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab);
         player = newPlayer.GetComponent<PlayerMovement>();
         player.OnDisappearEnd.AddListener(PlayerRevive);
+        player.OnSpawnEnd.AddListener(PlayerAlive);
         player.OnBallMove.AddListener(levelVisualizer.Hide);
         OnPlayerCreate.Invoke();
     }
@@ -105,21 +107,30 @@ public class LevelManager : MonoBehaviour
         if (player != null) player.Disappear();
     }
 
-    private void PlayerDead()
+    private void KillPlayer()
     {
-        playerIsDead = true;
-        levelVisualizer.Show();
-        PlayerDisappear();
+        if (!playerIsDead)
+        {
+            playerIsDead = true;
+            levelVisualizer.Show();
+            PlayerDisappear();
+        }
     }
 
     private void PlayerRevive()
     {
         if (playerIsDead)
         {
-            playerIsDead = false;
             PrepareTheMap(mapManager.GetMap());
             MovePlayerToSpawnPoint();
+            OnPlayerSpawn.Invoke();
+            OnPlayerIsDead.Invoke();
         }
+    }
+
+    private void PlayerAlive()
+    {
+        playerIsDead = false;
     }
 
     void Victory()

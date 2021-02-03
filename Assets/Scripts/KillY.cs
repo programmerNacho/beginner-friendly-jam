@@ -6,25 +6,44 @@ public class KillY : MonoBehaviour
 {
     [SerializeField]
     private float minY = -10f;
+    private LevelManager levelManager = null;
     private PlayerMovement playerMovement = null;
+
+    private void Start()
+    {
+        levelManager = FindObjectOfType<LevelManager>();
+        levelManager.OnPlayerCreate.AddListener(SetPlayer);
+        levelManager.OnPlayerSpawn.AddListener(Activate);
+    }
+
+    private void SetPlayer()
+    {
+        playerMovement = levelManager.GetPlayer();
+    }
+
+    private void Activate()
+    {
+        enabled = true;
+    }
 
     private void Update()
     {
-        if(playerMovement == null)
-        {
-            playerMovement = FindObjectOfType<PlayerMovement>();
-        }
-        else
+        if(playerMovement != null)
         {
             if(playerMovement.transform.position.y <= minY)
             {
-                KillPlayer();
+                if (enabled)
+                {
+                    print(enabled);
+                    enabled = false;
+                    KillPlayer();
+                }
             }
         }
     }
 
     public void KillPlayer()
     {
-        FindObjectOfType<LevelManager>().OnPlayerDead.Invoke();
+        levelManager.OnKillPlayer.Invoke();
     }
 }

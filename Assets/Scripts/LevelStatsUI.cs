@@ -19,7 +19,7 @@ public class LevelStatsUI : MonoBehaviour
     {
         SetTimeText((int)levelStats.playTime);
         SetShotsText(levelStats.NumberOfShots);
-        SetDeathsText(levelStats.NumberOfDeaths / 2);
+        SetDeathsText(levelStats.NumberOfDeaths);
         // Lo divido entre 2 porque me cuenta las muertes por duplicado.
     }
 

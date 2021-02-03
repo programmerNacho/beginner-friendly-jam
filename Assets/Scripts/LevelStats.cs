@@ -45,7 +45,7 @@ public class LevelStats : MonoBehaviour
     {
         levelManager = FindObjectOfType<LevelManager>();
         levelManager.OnPlayerCreate.AddListener(SetPlayer);
-        levelManager.OnPlayerDead.AddListener(AddDeath);
+        levelManager.OnPlayerIsDead.AddListener(AddDeath);
     }
 
     private void SetPlayer()
