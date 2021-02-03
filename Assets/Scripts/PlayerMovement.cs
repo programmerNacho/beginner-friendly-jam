@@ -89,6 +89,10 @@ public class PlayerMovement : MonoBehaviour
         if (!canGetInput) OnShotEnd.Invoke();
     }
 
+    public void ShotCanceled()
+    {
+        OnShotEnd.Invoke();
+    }
     public void ShotUp(Vector3 shotVector)
     {
         if (canGetInput)
@@ -152,8 +156,6 @@ public class PlayerMovement : MonoBehaviour
                 OnBallStopped.Invoke();
                 shotReady = true;
             }
-
-            
         }
         else
         {

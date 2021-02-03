@@ -704,7 +704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7413954784054921679, guid: df73c0c1d54ef1245b1813d31a1129db, type: 3}
       propertyPath: m_Name
-      value: Map L1 Variant
+      value: Map L1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df73c0c1d54ef1245b1813d31a1129db, type: 3}
