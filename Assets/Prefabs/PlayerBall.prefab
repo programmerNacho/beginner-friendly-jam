@@ -5102,7 +5102,7 @@ AudioSource:
   m_GameObject: {fileID: 792163936010984912}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6848134078020077197, guid: 17ebc86920cb77e41b79a3c6ed213474, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -5303,6 +5303,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   groundRadio: 0.11
+  canShotInAir: 1
 --- !u!54 &8711330795435156764
 Rigidbody:
   m_ObjectHideFlags: 0
