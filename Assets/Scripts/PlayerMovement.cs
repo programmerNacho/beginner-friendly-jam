@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 groundPosition = Vector3.zero;
     [SerializeField] private float groundRadio = 0.11f;
     bool isGrounded = false;
+    [SerializeField] private bool canShotInAir = true;
 
     private Vector3 playerToMouse = Vector3.zero;
 
@@ -67,8 +68,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGround()
     {
-        groundPosition = transform.position + (Vector3.down * 0.01f);
-        isGrounded = Physics.CheckSphere(groundPosition, groundRadio, GroundLayer);
+        if (canShotInAir) isGrounded = true;
+        else
+        {
+            groundPosition = transform.position + (Vector3.down * 0.01f);
+            isGrounded = Physics.CheckSphere(groundPosition, groundRadio, GroundLayer);
+        }
     }
     public void ShotDown()
     {
