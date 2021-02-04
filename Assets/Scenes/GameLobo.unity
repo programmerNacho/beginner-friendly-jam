@@ -685,6 +685,10 @@ PrefabInstance:
       propertyPath: m_Font
       value: 
       objectReference: {fileID: 12800000, guid: ede3702664d243245a307f119a6ee490, type: 3}
+    - target: {fileID: 6935647248629023493, guid: c2f74ca006f9ed04880759e573116dba, type: 3}
+      propertyPath: m_Text
+      value: "\r\nPress the mouse button \ntwice"
+      objectReference: {fileID: 0}
     - target: {fileID: 8591626722373430921, guid: c2f74ca006f9ed04880759e573116dba, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1067,6 +1071,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -37.5
       objectReference: {fileID: 0}
+    - target: {fileID: 9023673472585859883, guid: 6df02f6dc58340b4baa14b1b658095be, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023673472585859883, guid: 6df02f6dc58340b4baa14b1b658095be, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023673472585859883, guid: 6df02f6dc58340b4baa14b1b658095be, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8587668637707940865, guid: 6df02f6dc58340b4baa14b1b658095be, type: 3}
     - {fileID: 1217604822367825809, guid: 6df02f6dc58340b4baa14b1b658095be, type: 3}
@@ -1350,6 +1366,10 @@ PrefabInstance:
       propertyPath: m_Font
       value: 
       objectReference: {fileID: 12800000, guid: ede3702664d243245a307f119a6ee490, type: 3}
+    - target: {fileID: 9154040945853103272, guid: 37f435f8e16be4f43bb02fbf4b40e8a0, type: 3}
+      propertyPath: m_Text
+      value: 'Look how many flags! '
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37f435f8e16be4f43bb02fbf4b40e8a0, type: 3}
 --- !u!4 &1218746221 stripped
