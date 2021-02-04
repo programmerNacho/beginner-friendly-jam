@@ -13,6 +13,8 @@ public class LevelSound : MonoBehaviour
     private float minPitchHit = 0f;
 
     [SerializeField]
+    private AudioClip ballInHoleSound = null;
+    [SerializeField]
     private AudioClip completeSound = null;
     [SerializeField]
     private AudioClip deadSound = null;
@@ -34,6 +36,7 @@ public class LevelSound : MonoBehaviour
     }
     private void PlayComplete()
     {
+        PlaySound(ballInHoleSound);
         PlaySound(completeSound);
     }
     private void PlayDead()

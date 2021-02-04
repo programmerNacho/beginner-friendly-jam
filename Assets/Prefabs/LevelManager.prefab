@@ -463,6 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPitchHit: 1
   minPitchHit: 0.95
+  ballInHoleSound: {fileID: 8300000, guid: bd1345607a1ffd94ab9c70aae9602654, type: 3}
   completeSound: {fileID: 8300000, guid: 576853e1081614142bbc4e1dc6e8586e, type: 3}
   deadSound: {fileID: 8300000, guid: 9d952927d608dfb4bb05f49cab10abe0, type: 3}
 --- !u!114 &750725989
