@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelStats : MonoBehaviour
 {
     private LevelManager levelManager = null;
     private PlayerMovement playerMovement = null;
+
+    public UnityEvent OnChangeShots = new UnityEvent();
+    public UnityEvent OnChangeDeaths = new UnityEvent();
 
     public float playTime = 0f;
 
@@ -71,11 +75,13 @@ public class LevelStats : MonoBehaviour
     public void ShotTaken()
     {
         numberOfShots++;
+        OnChangeShots.Invoke();
     }
 
     private void AddDeath()
     {
         numberOfDeaths++;
+        OnChangeDeaths.Invoke();
     }
 
     public void LevelFinished()
