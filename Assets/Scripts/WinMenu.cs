@@ -14,6 +14,12 @@ public class WinMenu : MonoBehaviour
     [SerializeField]
     private GameObject winPanel = null;
     [SerializeField]
+    private TextMeshProUGUI bestTimeText = null;
+    [SerializeField]
+    private TextMeshProUGUI bestShotText = null;
+    [SerializeField]
+    private TextMeshProUGUI bestDeathText = null;
+    [SerializeField]
     private List<GameObject> toDeactive = new List<GameObject>();
 
     private LevelStats levelStats = null;
@@ -40,5 +46,14 @@ public class WinMenu : MonoBehaviour
         {
             go.SetActive(false);
         }
+    }
+
+    private void Update()
+    {
+        BestStats bs = BestStats.Instance;
+
+        bestTimeText.text = ((int)bs.bestPlayTime).ToString();
+        bestShotText.text = bs.bestNumberOfShots.ToString();
+        bestDeathText.text = bs.bestNumberOfDeaths.ToString();
     }
 }

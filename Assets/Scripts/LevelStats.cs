@@ -46,6 +46,7 @@ public class LevelStats : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
         levelManager.OnPlayerCreate.AddListener(SetPlayer);
         levelManager.OnPlayerIsDead.AddListener(AddDeath);
+        levelManager.OnLevelCompleted.AddListener(LevelFinished);
     }
 
     private void SetPlayer()
@@ -80,5 +81,7 @@ public class LevelStats : MonoBehaviour
     public void LevelFinished()
     {
         levelFinished = true;
+
+        BestStats.Instance.LevelFinished(playTime, numberOfShots, numberOfDeaths);
     }
 }
