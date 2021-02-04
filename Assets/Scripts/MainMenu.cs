@@ -17,6 +17,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private string sceneName = "";
 
+    [SerializeField]
+    private Animator whiteAnimator;
+
     private bool isLoadingLevel = false;
 
     private void Start()
@@ -49,7 +52,6 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
-
     private IEnumerator LoadSceneCoroutine()
     {
         mainMenuCamera.gameObject.SetActive(false);

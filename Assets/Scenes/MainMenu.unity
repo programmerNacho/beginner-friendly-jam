@@ -805,6 +805,7 @@ MonoBehaviour:
   creditsCamera: {fileID: 2054063008}
   loadSceneAnimationTime: 2
   sceneName: GameLobo
+  whiteAnimator: {fileID: 0}
 --- !u!4 &536960553
 Transform:
   m_ObjectHideFlags: 0
