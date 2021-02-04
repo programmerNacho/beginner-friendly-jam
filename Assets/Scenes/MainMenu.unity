@@ -574,7 +574,7 @@ MonoBehaviour:
   mainMenuCamera: {fileID: 1762934439}
   loadSceneCamera: {fileID: 1404222916}
   loadSceneAnimationTime: 2
-  sceneName: Game
+  sceneName: GameLobo
 --- !u!4 &536960553
 Transform:
   m_ObjectHideFlags: 0
