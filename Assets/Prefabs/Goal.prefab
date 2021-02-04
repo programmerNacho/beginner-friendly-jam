@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2461051268469569598}
-  - component: {fileID: 1152624285834213094}
   - component: {fileID: 5031729961416551921}
+  - component: {fileID: 8698258736564199582}
   m_Layer: 1
   m_Name: AreaTrigger
   m_TagString: Untagged
@@ -32,19 +32,6 @@ Transform:
   m_Father: {fileID: 3401466784094840135}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1152624285834213094
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4833880345843792318}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5031729961416551921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +47,20 @@ MonoBehaviour:
   OnPlayerEntered:
     m_PersistentCalls:
       m_Calls: []
+--- !u!136 &8698258736564199582
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4833880345843792318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.25
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &9200337130917039629
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +146,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6827916693045992529, guid: 6a8b7b40ce7986b4181f3e994bdf0b11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552281527386836402, guid: 6a8b7b40ce7986b4181f3e994bdf0b11, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
