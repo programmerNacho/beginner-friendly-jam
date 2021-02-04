@@ -38,7 +38,7 @@ public class WinMenu : MonoBehaviour
         int playTime = (int)levelStats.playTime;
         int numberOfShots = levelStats.NumberOfShots;
         int numberOfDeaths = levelStats.NumberOfDeaths;
-        timeText.text = playTime.ToString();
+        timeText.text = ConvertSecondsToStringFormatted(playTime);
         shotText.text = numberOfShots.ToString();
         deathText.text = numberOfDeaths.ToString();
 
@@ -52,8 +52,16 @@ public class WinMenu : MonoBehaviour
     {
         BestStats bs = BestStats.Instance;
 
-        bestTimeText.text = ((int)bs.bestPlayTime).ToString();
+        bestTimeText.text = ConvertSecondsToStringFormatted((int)bs.bestPlayTime);
         bestShotText.text = bs.bestNumberOfShots.ToString();
         bestDeathText.text = bs.bestNumberOfDeaths.ToString();
+    }
+
+    private string ConvertSecondsToStringFormatted(int seconds)
+    {
+        int minutes = (int)(seconds / 60f);
+        int sec = seconds - (minutes * 60);
+        string secondsString = sec < 10 ? "0" + sec.ToString() : sec.ToString();
+        return minutes + ":" + secondsString;
     }
 }
