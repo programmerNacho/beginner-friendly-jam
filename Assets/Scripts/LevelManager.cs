@@ -51,6 +51,7 @@ public class LevelManager : MonoBehaviour
 
     void SetNewGame()
     {
+        mapManager.HideAllMaps();
         PrepareTheMap(mapManager.GetMap());
         CreatePlayer();
         MovePlayerToSpawnPoint();
@@ -61,6 +62,8 @@ public class LevelManager : MonoBehaviour
     {
         if (map != null)
         {
+            mapManager.ShowMap(map);
+
             // Guardamos el spawn y camara
             currentSpawnPoint = map.GetCurrentSpawnPoint();
 
@@ -100,7 +103,11 @@ public class LevelManager : MonoBehaviour
 
     void PlayerSpawn()
     {
-        if (player != null) player.Spawn();
+        if (player != null)
+        {
+            mapManager.HidePreviousMap();
+            player.Spawn();
+        }
     }
 
     void PlayerDisappear()
@@ -133,8 +140,7 @@ public class LevelManager : MonoBehaviour
     {
         playerIsDead = false;
     }
-
-    void Victory()
+    private void Victory()
     {
         OnLevelCompleted.Invoke();
     }

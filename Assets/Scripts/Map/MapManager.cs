@@ -26,4 +26,23 @@ public class MapManager : MonoBehaviour
             return mapList[currentMap];
         }
     }
+    public void HideAllMaps()
+    {
+        foreach (Map map in mapList)
+        {
+            map.gameObject.SetActive(false);
+        }
+    }
+    public void ShowMap(Map map)
+    {
+            map.gameObject.SetActive(true);
+    }
+    public void HidePreviousMap()
+    {
+        int targetMap = currentMap - 1;
+        if (targetMap >= 0)
+        {
+            mapList[targetMap].gameObject.SetActive(false);
+        }
+    }
 }
