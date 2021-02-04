@@ -11,6 +11,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera loadSceneCamera = null;
     [SerializeField]
+    private CinemachineVirtualCamera creditsCamera = null;
+    [SerializeField]
     private float loadSceneAnimationTime = 2f;
     [SerializeField]
     private string sceneName = "";
@@ -29,6 +31,18 @@ public class MainMenu : MonoBehaviour
             isLoadingLevel = true;
             StartCoroutine(LoadSceneCoroutine());
         }
+    }
+
+    public void OpenCredits()
+    {
+        mainMenuCamera.gameObject.SetActive(false);
+        creditsCamera.gameObject.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        creditsCamera.gameObject.SetActive(false);
+        mainMenuCamera.gameObject.SetActive(true);
     }
 
     public void ExitApplication()
