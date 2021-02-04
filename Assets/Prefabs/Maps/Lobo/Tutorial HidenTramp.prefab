@@ -384,6 +384,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 437989640481872789, guid: df73c0c1d54ef1245b1813d31a1129db, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2429332114627506500, guid: df73c0c1d54ef1245b1813d31a1129db, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
