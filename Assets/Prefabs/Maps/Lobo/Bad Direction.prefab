@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: ede3702664d243245a307f119a6ee490, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,7 +184,7 @@ TextMesh:
   m_FontSize: 255
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: ede3702664d243245a307f119a6ee490, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -239,7 +239,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: ede3702664d243245a307f119a6ee490, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -279,7 +279,7 @@ TextMesh:
   m_FontSize: 255
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: ede3702664d243245a307f119a6ee490, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -499,7 +499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7413954784054921672, guid: df73c0c1d54ef1245b1813d31a1129db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 7413954784054921672, guid: df73c0c1d54ef1245b1813d31a1129db, type: 3}
       propertyPath: m_LocalPosition.y
@@ -507,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7413954784054921672, guid: df73c0c1d54ef1245b1813d31a1129db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -7.25
       objectReference: {fileID: 0}
     - target: {fileID: 7413954784054921672, guid: df73c0c1d54ef1245b1813d31a1129db, type: 3}
       propertyPath: m_LocalRotation.w
