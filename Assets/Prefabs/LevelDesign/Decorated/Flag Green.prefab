@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5659492917977851710}
   - component: {fileID: 8552281527386836402}
   m_Layer: 0
-  m_Name: Flag
+  m_Name: Flag Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,8 +60,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5193148ebbe1830438ed1391cf230bb1, type: 2}
-  - {fileID: 2100000, guid: 08110fb0f4256844e90c649c61fbfebf, type: 2}
+  - {fileID: 2100000, guid: 5346047f54c95654681542552f4e96ee, type: 2}
+  - {fileID: 2100000, guid: 126e14cbdabd7e044aca441cad70633d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
