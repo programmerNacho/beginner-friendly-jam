@@ -176,7 +176,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3950884085061680297}
-  m_Text: "Wow. \nWhere did he go?"
+  m_Text: "Wow. \nWhere did it go?"
   m_OffsetZ: 0
   m_CharacterSize: 0.02
   m_LineSpacing: 1
