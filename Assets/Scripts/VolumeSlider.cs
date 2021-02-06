@@ -18,24 +18,32 @@ public class VolumeSlider : MonoBehaviour
         switch (typeOfVolume)
         {
             case TypeOfVolume.FX:
-                slider.value = SoundManager.Instance.VolumeFX;
+                slider.value = 1;
                 break;
             case TypeOfVolume.Music:
-                slider.value = SoundManager.Instance.VolumeMusic;
+                slider.value = 1;
                 break;
         }
     }
 
     public void SetVolume(float value)
     {
+        float exponentialValue = Mathf.Log10(value) * 20.0f;
         switch (typeOfVolume)
         {
             case TypeOfVolume.FX:
-                SoundManager.Instance.VolumeFX = value;
+                SoundManager.Instance.VolumeFX = exponentialValue;
                 break;
             case TypeOfVolume.Music:
-                SoundManager.Instance.VolumeMusic = value;
+                SoundManager.Instance.VolumeMusic = exponentialValue;
                 break;
         }
+    }
+
+    public void SetMusicValue(float value)
+    {
+        float exponentialValue = Mathf.Log10(value) * 20.0f;
+        Debug.Log(exponentialValue);
+        SoundManager.Instance.VolumeMusic = exponentialValue;
     }
 }
